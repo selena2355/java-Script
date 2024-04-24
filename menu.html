@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu dengan jQuery</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    #menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    #menu li {
+        display: inline;
+        margin-right: 20px;
+    }
+    #menu li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+    }
+    #menu li a:hover {
+        color: #ff0000;
+    }
+</style>
+</head>
+<body>
+
+<ul id="menu">
+    <li><a href="#" id="home">Home</a></li>
+    <li><a href="#" id="about">About</a></li>
+    <li><a href="#" id="contact">Contact</a></li>
+</ul>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // Menggunakan jQuery untuk menambahkan efek pada menu
+    $(document).ready(function(){
+        // Efek saat mouse masuk
+        $("#menu li a").mouseenter(function(){
+            $(this).css("font-size", "20px");
+        });
+        // Efek saat mouse keluar
+        $("#menu li a").mouseleave(function(){
+            $(this).css("font-size", "16px");
+        });
+    });
+</script>
+
+</body>
+</html>

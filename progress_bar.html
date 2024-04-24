@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download Dialog dengan ProgressBar</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    #progressbar {
+        width: 90%;
+        margin: 20px auto;
+    }
+</style>
+</head>
+<body>
+
+<button id="downloadButton">Mulai Download</button>
+
+<div id="downloadDialog" title="Download Progress">
+    <div id="progressbar"></div>
+    <p id="progressStatus">Proses download dimulai...</p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#downloadDialog").dialog({
+            autoOpen: false, // Jendela dialog tidak terbuka secara otomatis saat halaman dimuat
+            modal: true, // Membuat jendela dialog menjadi modal
+            closeOnEscape: false, // Menghilangkan kemampuan menutup dialog dengan tombol escape
+            draggable: false, // Menghilangkan kemampuan menyeret dialog
+            resizable: false, // Menghilangkan kemampuan merubah ukuran dialog
+            buttons: {
+                "Batal": function() {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        // Menangani klik tombol download
+        $("#downloadButton").click(function(){
+            $("#downloadDialog").dialog("open");
+            simulateDownload();
+        });
+
+        // Fungsi untuk mensimulasikan proses download
+        function simulateDownload() {
+            var progressbar = $("#progressbar"),
+                progressLabel = $("#progressStatus"),
+                progressValue = 0;
+
+            var downloadInterval = setInterval(function() {
+                progressValue += Math.floor(Math.random() * 5);
+                progressbar.progressbar("value", progressValue);
+                progressLabel.text("Proses download: " + progressValue + "%");
+
+                // Jika proses download selesai
+                if (progressValue >= 100) {
+                    clearInterval(downloadInterval);
+                    progressLabel.text("Download selesai!");
+                    $("#downloadDialog").dialog("option", "buttons", [{
+                        text: "Tutup",
+                        click: function() {
+                            $(this).dialog("close");
+                        }
+                    }]);
+                }
+            }, 500);
+        }
+
+        // Inisialisasi progress bar
+        $("#progressbar").progressbar({
+            value: false
+        });
+    });
+</script>
+
+</body>
+</html>
