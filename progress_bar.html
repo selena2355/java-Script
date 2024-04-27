@@ -21,7 +21,6 @@
 
 <div id="downloadDialog" title="Download Progress">
     <div id="progressbar"></div>
-    <p id="progressStatus">Proses download dimulai...</p>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -50,7 +49,6 @@
         // Fungsi untuk mensimulasikan proses download
         function simulateDownload() {
             var progressbar = $("#progressbar"),
-                progressLabel = $("#progressStatus"),
                 progressValue = 0;
 
             var downloadInterval = setInterval(function() {
